@@ -3,9 +3,11 @@ const logger = require("./logger");
 const PORT = 8000;
 
 const server = http.createServer((req, res) => {
-    const date = new Date();
-    const logText = date.toUTCString() + "\t" + req.method + "\t" + req.url + "\n";
-    logger(logText);
+    if(!req.url.includes("favicon")){
+        const date = new Date();
+        const logText = date.toUTCString() + "\t" + req.method + "\t" + req.url + "\n";
+        logger(logText);
+    }
     return res.end("<h1>hello from server!!</h1>");
 })
 
