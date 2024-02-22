@@ -1,22 +1,16 @@
 const http = require("http");
 const logger = require("./logger");
-const PORT = 8000;
+const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
+const PORT = process.env.PORT || 8001;
 
-const server = http.createServer((req, res) => {
-    if(!req.url.includes("favicon")){
-        const date = new Date();
-        const logText = date.toUTCString() + "\t" + req.method + "\t" + req.url + "\n";
-        logger(logText);
-    }
-    if(req.url === "/"){
-        return res.end("<h1>Home page</h1>");
-    }else if(req.url === "/about"){
-        return res.end("<h1>About page</h1>");
-    } else{
-        return res.end("<h1>404 not found</h1>");
-    }
+const app = express();
+
+app.get("/", (req,res) => {
+    res.end("<h1>hlo from express server!!##</h1>")
 })
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log("Server running on port ", PORT);
 })
