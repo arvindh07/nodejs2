@@ -21,6 +21,21 @@ const handleCreateShortUrl = async (req, res) => {
     })
 }
 
+const handleRedirectUrl = async (req, res) => {
+    // find the id in db and redirect to the redirect url
+    const {id} = req.params;
+    const url = await URL.findOne({
+        shortId: id
+    })
+    if(!url){
+        return res.status(400).json({
+            msg: "There is no url found"
+        })
+    }
+    return res.status(300).redirect(url.redirectUrl);
+}
+
 module.exports = {
-    handleCreateShortUrl
+    handleCreateShortUrl,
+    handleRedirectUrl
 }
