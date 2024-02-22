@@ -22,6 +22,14 @@ const handleCreateUser = async (req, res) => {
     }
 }
 
+const handleGetAllUsers = async (req, res) => {
+    const allUsers = await User.find();
+    return res.status(200).json({
+        users: allUsers
+    })
+}
+
 module.exports = {
-    handleCreateUser
+    handleCreateUser,
+    handleGetAllUsers
 }
