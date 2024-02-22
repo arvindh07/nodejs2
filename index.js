@@ -14,6 +14,9 @@ connectToDb().then(() => {
     })
 });
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 // welcome route
 app.get("/", (req,res) => {
     res.send("<h1>hlo from express server!!##</h1>")
