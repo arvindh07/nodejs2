@@ -8,7 +8,11 @@ const PORT = process.env.PORT || 8001;
 const app = express();
 
 app.get("/", (req,res) => {
-    res.end("<h1>hlo from express server!!##</h1>")
+    res.send("<h1>hlo from express server!!##</h1>")
+})
+// error 404 route
+app.use("/*", (req, res) => {
+    return res.send("<h1>404 not found</h1>")
 })
 
 app.listen(PORT, () => {
