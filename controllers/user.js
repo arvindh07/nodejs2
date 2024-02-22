@@ -13,7 +13,7 @@ const handleCreateUser = async (req, res) => {
             name,
             email
         })
-        return res.status(200).json({
+        return res.status(201).json({
             msg: "Created user",
             id: createdUser._id.toString()
         })
@@ -29,7 +29,44 @@ const handleGetAllUsers = async (req, res) => {
     })
 }
 
+const handleUpdateUser = async(req, res) => {
+    const userId = req.params.id;
+    const {name, email} = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(userId, {
+        name,
+        email
+    })
+    if(!updatedUser){
+        return res.status(400).json({
+            msg: "There is no user found"
+        })
+    }
+
+    return res.status(200).json({
+        msg: "Updated successfully",
+        updatedUser
+    })
+}
+
+const handleDeleteUser = async(req, res) => {
+    const userId = req.params.id;
+
+    const user = await User.findByIdAndDelete(userId);
+    if(!user){
+        return res.status(400).json({
+            msg: "There is no user found"
+        })
+    }
+
+    return res.status(200).json({
+        msg: "Deleted successfully"
+    })
+}
+
 module.exports = {
     handleCreateUser,
-    handleGetAllUsers
+    handleGetAllUsers,
+    handleUpdateUser,
+    handleDeleteUser
 }
