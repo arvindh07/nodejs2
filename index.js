@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const { connectToDb } = require("./connection");
 dotenv.config();
 const userRouter = require("./routes/user");
+const urlRouter = require("./routes/url");
 const PORT = process.env.PORT || 8001;
 
 const app = express();
@@ -30,6 +31,8 @@ app.get("/", (req,res) => {
 
 // // user router
 // app.use("/api/user", userRouter);
+// url router
+app.use("/url", urlRouter);
 
 // error 404 route
 app.use("/*", (req, res) => {
