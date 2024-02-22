@@ -2,7 +2,9 @@ const fs = require("fs");
 
 const logger = (logText) => {
     fs.appendFile("log.txt", logText, (err) => {
-        console.log("log err -> ", err);
+        if(err){
+            console.log("log err -> ", err);
+        }
     });
 }
 

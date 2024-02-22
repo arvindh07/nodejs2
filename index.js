@@ -1,4 +1,3 @@
-const http = require("http");
 const logger = require("./logger");
 const express = require("express");
 const dotenv = require("dotenv");
@@ -17,6 +16,13 @@ connectToDb().then(() => {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// logger route
+app.use("/", (req, res, next) => {
+    const date = new Date();
+    const logText = date.toLocaleString() + "\t" + req.method + "\t" + req.url + "\n";
+    logger(logText);
+    next();
+})
 // welcome route
 app.get("/", (req,res) => {
     res.send("<h1>hlo from express server!!##</h1>")
