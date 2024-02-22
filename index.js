@@ -28,8 +28,8 @@ app.get("/", (req,res) => {
     res.send("<h1>hlo from express server!!##</h1>")
 })
 
-// user router
-app.use("/api/user", userRouter);
+// // user router
+// app.use("/api/user", userRouter);
 
 // error 404 route
 app.use("/*", (req, res) => {
