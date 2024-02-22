@@ -1,4 +1,0 @@
-Thu, 22 Feb 2024 04:46:34 GMT	GET	/
-Thu, 22 Feb 2024 04:46:41 GMT	GET	/about
-Thu, 22 Feb 2024 04:46:46 GMT	GET	/about/123
-Thu, 22 Feb 2024 04:46:57 GMT	GET	/about/123?name=arvindh
