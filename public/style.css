@@ -9,6 +9,11 @@ body {
 .heading {
     text-align: center;
 }
+.login__heading{
+    font-size: 2em;
+    margin-bottom: 2rem;
+    color:crimson;
+}
 
 .box {
     background-color: white;
@@ -23,11 +28,26 @@ body {
     align-items: center;
     justify-content: center;
 }
+.box .login{
+    flex-direction: column;
+}
+.box .login .inputBox{
+    width: 50%;
+    margin: 0.5rem 0;
+}
 
 .box input {
     padding: 10px;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.box .login .inputBox label{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.box .login .inputBox input{
     width: 100%;
 }
 
@@ -41,6 +61,11 @@ body {
     color: white;
     cursor: pointer;
     transition: all;
+}
+.box .loginBtn{
+    padding-inline: 30px;
+    font-size: 1.2em;
+    margin-top: 1.5rem;
 }
 
 .box button:hover {
