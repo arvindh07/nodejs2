@@ -5,7 +5,7 @@ const checkUserAuth = require("../middlewares/auth");
 const { verifyToken } = require("../utils/token");
 
 router.get("/", verifyToken ,async (req,res) => {
-    const allUrls = await URL.find();
+    const allUrls = await URL.find({ user: req.user.id });
     res.render("Homepage", {
         allUrls
     })

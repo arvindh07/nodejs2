@@ -7,7 +7,7 @@ dotenv.config();
 const userRouter = require("./routes/user");
 const urlRouter = require("./routes/url");
 const staticRouter = require("./routes/staticRouter");
-const checkUserAuth = require("./middlewares/auth");
+const {verifyToken} = require("./utils/token");
 const { session } = require("./session/session");
 const PORT = process.env.PORT || 8001;
 
@@ -36,7 +36,7 @@ app.use("/", staticRouter);
 // user router
 app.use("/api/user", userRouter);
 // url router
-app.use("/url", urlRouter);
+app.use("/url", verifyToken, urlRouter);
 // static router
 
 // error 404 route

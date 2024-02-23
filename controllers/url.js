@@ -11,14 +11,13 @@ const handleCreateShortUrl = async (req, res) => {
     }
 
     const shortId = randomUUID();
-    const shortUrl = await URL.create({
+    await URL.create({
         redirectUrl,
         shortId,
         visitHistory: [],
-        user: res.locals.id
+        user: req.user.id
     })
-    console.log("locals:url", res.locals, shortUrl);
-    const allUrls = await URL.find();
+    const allUrls = await URL.find({ user: req.user.id });
     return res.render('Homepage', {shortId, allUrls});
 }
 
