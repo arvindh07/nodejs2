@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 const handleCreateUser = async (req, res) => {
@@ -9,10 +10,11 @@ const handleCreateUser = async (req, res) => {
                 msg: "All fields are required"
             })
         }
-        const createdUser = await User.create({
+        const hashed_password = await bcrypt.hash(password, 10);
+        await User.create({
             name,
             email,
-            password
+            password: hashed_password
         })
         return res.render("Homepage");
     } catch (error) {
@@ -35,7 +37,7 @@ const handleLogin = async (req, res) => {
                 msg: "No user found"
             })
         }
-        const matchPassword = user.password === password;
+        const matchPassword = await bcrypt.compare(password, user.password);
         if(!matchPassword){
             return res.status(400).json({
                 msg: "Password didnt match"
