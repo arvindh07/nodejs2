@@ -1,9 +1,9 @@
 const User = require("../models/user");
 
 const handleCreateUser = async (req, res) => {
-    const { name, email } = req.body;
+    const { name, email, password } = req.body;
     try {
-        if (!name || !email) {
+        if (!name || !email || !password) {
             // bad request
             return res.status(400).json({
                 msg: "All fields are required"
@@ -11,12 +11,37 @@ const handleCreateUser = async (req, res) => {
         }
         const createdUser = await User.create({
             name,
-            email
+            email,
+            password
         })
-        return res.status(201).json({
-            msg: "Created user",
-            id: createdUser._id.toString()
-        })
+        return res.render("Homepage");
+    } catch (error) {
+        console.log("Create user error", error);
+    }
+}
+
+const handleLogin = async (req, res) => {
+    const {email, password} = req.body;
+    try {
+        if (!email || !password) {
+            // bad request
+            return res.status(400).json({
+                msg: "All fields are required"
+            })
+        }
+        const user = await User.findOne({email});
+        if(!user){
+            return res.status(400).json({
+                msg: "No user found"
+            })
+        }
+        const matchPassword = user.password === password;
+        if(!matchPassword){
+            return res.status(400).json({
+                msg: "Password didnt match"
+            })
+        }
+        return res.render("Homepage");
     } catch (error) {
         console.log("Create user error", error);
     }
@@ -68,5 +93,6 @@ module.exports = {
     handleCreateUser,
     handleGetAllUsers,
     handleUpdateUser,
-    handleDeleteUser
+    handleDeleteUser,
+    handleLogin
 }

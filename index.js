@@ -27,11 +27,10 @@ app.use("/", (req, res, next) => {
     logger(logText);
     next();
 })
-// welcome route
+// static pages router
 app.use("/", staticRouter);
-
 // user router
-// app.use("/api/user", userRouter);
+app.use("/api/user", userRouter);
 // url router
 app.use("/url", urlRouter);
 // static router
