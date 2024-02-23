@@ -14,7 +14,11 @@ const urlSchema = new mongoose.Schema({
         timeStamps: {
             type: Number
         }
-    }]
+    }],
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
 })
 
 module.exports = mongoose.model("Url", urlSchema);
