@@ -1,5 +1,5 @@
 const express = require("express");
-const { handleCreateShortUrl, handleRedirectUrl, handleGetAllUrls, handleDeleteUrl } = require("../controllers/url");
+const { handleCreateShortUrl, handleRedirectUrl, handleGetAllUrls, handleDeleteUrl, handleGetAnalytics} = require("../controllers/url");
 
 const router = express.Router();
 
@@ -10,5 +10,7 @@ router.route("/")
 router.route("/:id")
     .get(handleRedirectUrl)
     .delete(handleDeleteUrl)
+
+router.get("/analytics/:id", handleGetAnalytics);
 
 module.exports = router;

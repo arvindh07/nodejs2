@@ -62,9 +62,24 @@ const handleDeleteUrl = async(req, res) => {
     })
 }
 
+const handleGetAnalytics = async (req, res) => {
+    const {id} = req.params;
+    if(!id){
+        return res.status(400).json({
+            "error": "ID required"
+        })
+    }
+    const url = await URL.findOne({ shortId: id});
+    return res.status(200).json({
+        msg: "Successfully deleted",
+        totalClicks: url?.visitHistory?.length
+    })
+}
+
 module.exports = {
     handleCreateShortUrl,
     handleRedirectUrl,
     handleGetAllUrls,
-    handleDeleteUrl
+    handleDeleteUrl,
+    handleGetAnalytics
 }
