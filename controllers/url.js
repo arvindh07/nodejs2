@@ -4,7 +4,6 @@ const { randomUUID } = new ShortUniqueId({ length: 7 });
 
 const handleCreateShortUrl = async (req, res) => {
     const {redirectUrl} = req.body;
-    console.log("iunside", redirectUrl);
     if(!redirectUrl){
         return res.status(400).json({
             "error": "redirect url required"

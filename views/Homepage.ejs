@@ -59,9 +59,11 @@
             margin: 1rem auto;
             display: flex;
         }
-        #res__table{
+
+        #res__table {
             width: 100%;
         }
+
         #res__table td,
         th {
             border: 1px solid #ddd;
@@ -89,8 +91,8 @@
 <body>
     <h1 class="heading">Welcome to URL Shortener</h1>
     <div class="box">
-        <form action="" method="post">
-            <input type="text" placeholder="Enter your url">
+        <form action="/url" method="post">
+            <input type="text" name="redirectUrl" placeholder="Enter your url">
             <button>Submit</button>
         </form>
         <div class="results">
@@ -104,8 +106,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <% allUrls?.map((url, index)=> { %>
+                    <% allUrls?.map((url, index)=> { %>
+                        <tr>
                             <td>
                                 <%= index + 1 %>
                             </td>
@@ -118,8 +120,8 @@
                             <td>
                                 <%= url?.visitHistory?.length %>
                             </td>
-                            <% }) %>
-                                </td>
+                        </tr>
+                        <% }) %>
                 </tbody>
             </table>
         </div>
