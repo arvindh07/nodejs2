@@ -5,6 +5,7 @@ const { connectToDb } = require("./connection");
 dotenv.config();
 const userRouter = require("./routes/user");
 const urlRouter = require("./routes/url");
+const URL = require("./models/url");
 const PORT = process.env.PORT || 8001;
 
 const app = express();
@@ -26,9 +27,12 @@ app.use("/", (req, res, next) => {
     next();
 })
 // welcome route
-app.get("/", (req,res) => {
-    // res.send("<h1>hlo from express server!!##</h1>")
-    res.render("Homepage")
+app.get("/", async (req,res) => {
+    const allUrls = await URL.find();
+    console.log(allUrls);
+    res.render("Homepage", {
+        allUrls
+    })
 })
 
 // user router
