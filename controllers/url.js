@@ -71,8 +71,8 @@ const handleGetAnalytics = async (req, res) => {
     }
     const url = await URL.findOne({ shortId: id});
     return res.status(200).json({
-        msg: "Successfully deleted",
-        totalClicks: url?.visitHistory?.length
+        totalClicks: url?.visitHistory?.length,
+        analytics: url?.visitHistory
     })
 }
 
