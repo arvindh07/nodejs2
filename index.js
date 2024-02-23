@@ -1,11 +1,14 @@
 const logger = require("./logger");
 const express = require("express");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 const { connectToDb } = require("./connection");
 dotenv.config();
 const userRouter = require("./routes/user");
 const urlRouter = require("./routes/url");
 const staticRouter = require("./routes/staticRouter");
+const checkUserAuth = require("./middlewares/auth");
+const { session } = require("./session/session");
 const PORT = process.env.PORT || 8001;
 
 const app = express();
@@ -15,6 +18,7 @@ connectToDb().then(() => {
     })
 });
 
+app.use(cookieParser()); 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.set('view engine', 'ejs')
@@ -35,7 +39,7 @@ app.use("/api/user", userRouter);
 app.use("/url", urlRouter);
 // static router
 
-
+console.log("server session outside", session);
 // error 404 route
 app.use("/*", (req, res) => {
     return res.send("<h1>404 not found</h1>")

@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
+const { setSessionId } = require("../session/session");
 
 const handleCreateUser = async (req, res) => {
     const { name, email, password } = req.body;
@@ -43,6 +44,11 @@ const handleLogin = async (req, res) => {
                 msg: "Password didnt match"
             })
         }
+        // create session key and send it via response
+        const sessionId = "fhfvsdkf" + user.name + "jasvcfhuguy";
+        setSessionId(user._id.toString(), sessionId);
+        res.cookie("sessionId", sessionId);
+
         return res.render("Homepage");
     } catch (error) {
         console.log("Create user error", error);
