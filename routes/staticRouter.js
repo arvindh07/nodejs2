@@ -9,4 +9,12 @@ router.get("/", async (req,res) => {
     })
 })
 
+router.get("/login", async (req,res) => {
+    res.render("Login")
+})
+
+router.get("/signup", async (req,res) => {
+    res.render("Signup")
+})
+
 module.exports = router;

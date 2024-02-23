@@ -18,6 +18,7 @@ connectToDb().then(() => {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.set('view engine', 'ejs')
+app.use(express.static("public"));
 
 // logger route
 app.use("/", (req, res, next) => {
@@ -27,7 +28,7 @@ app.use("/", (req, res, next) => {
     next();
 })
 // welcome route
-app.get("/", staticRouter)
+app.use("/", staticRouter);
 
 // user router
 // app.use("/api/user", userRouter);
