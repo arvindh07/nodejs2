@@ -15,6 +15,7 @@ const handleCreateShortUrl = async (req, res) => {
     const shortUrl = await URL.create({
         redirectUrl,
         shortId,
+        visitHistory: []
     })
     
     return res.status(200).json({
@@ -34,7 +35,8 @@ const handleRedirectUrl = async (req, res) => {
         })
     }
     // whenever user to accessing the shorturl, we need to store their timestamps
-    url.visitHistory.timeStamps = Date.now();
+    url.visitHistory.push({timeStamps: Date.now()});
+    console.log("url", url);
     await url.save();
     return res.status(300).redirect(url.redirectUrl);
 }

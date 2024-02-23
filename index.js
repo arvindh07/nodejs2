@@ -27,10 +27,11 @@ app.use("/", (req, res, next) => {
 })
 // welcome route
 app.get("/", (req,res) => {
-    res.send("<h1>hlo from express server!!##</h1>")
+    // res.send("<h1>hlo from express server!!##</h1>")
+    res.render("Homepage")
 })
 
-// // user router
+// user router
 // app.use("/api/user", userRouter);
 // url router
 app.use("/url", urlRouter);

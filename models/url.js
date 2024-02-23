@@ -6,15 +6,15 @@ const urlSchema = new mongoose.Schema({
         required: true,
     },
     shortId: {
-        type: String
+        type: String,
+        required: true,
+        unique: true
     },
-    visitHistory: {
-        type: [
-            {
-                timeStamps: String
-            }
-        ]
-    }
+    visitHistory: [{
+        timeStamps: {
+            type: Number
+        }
+    }]
 })
 
 module.exports = mongoose.model("Url", urlSchema);
