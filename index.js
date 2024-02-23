@@ -16,6 +16,7 @@ connectToDb().then(() => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.set('view engine', 'ejs')
 
 // logger route
 app.use("/", (req, res, next) => {
