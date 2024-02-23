@@ -39,7 +39,6 @@ app.use("/api/user", userRouter);
 app.use("/url", urlRouter);
 // static router
 
-console.log("server session outside", session);
 // error 404 route
 app.use("/*", (req, res) => {
     return res.send("<h1>404 not found</h1>")

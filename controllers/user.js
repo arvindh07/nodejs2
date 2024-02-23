@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const { setSessionId } = require("../session/session");
+const { createToken } = require("../utils/token");
 
 const handleCreateUser = async (req, res) => {
     const { name, email, password } = req.body;
@@ -45,10 +46,14 @@ const handleLogin = async (req, res) => {
             })
         }
         // create session key and send it via response
-        const sessionId = "fhfvsdkf" + user.name + "jasvcfhuguy";
-        setSessionId(user._id.toString(), sessionId);
-        res.cookie("sessionId", sessionId);
+        // const sessionId = "fhfvsdkf" + user.name + "jasvcfhuguy";
+        // setSessionId(user._id.toString(), sessionId);
+        // res.cookie("sessionId", sessionId);
 
+        // stateless authentication
+        const token = createToken(user.email, user._id.toString())
+        res.cookie("token", token);
+ 
         return res.render("Homepage");
     } catch (error) {
         console.log("Create user error", error);
