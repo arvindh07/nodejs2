@@ -60,16 +60,15 @@ const handleDeleteUrl = async(req, res) => {
 }
 
 const handleGetAnalytics = async (req, res) => {
-    const {id} = req.params;
-    if(!id){
-        return res.status(400).json({
-            "error": "ID required"
-        })
-    }
-    const url = await URL.findOne({ shortId: id});
+    // const {id} = req.params;
+    // if(!id){
+    //     return res.status(400).json({
+    //         "error": "ID required"
+    //     })
+    // }
+    const allUrls = await URL.find({});
     return res.status(200).json({
-        totalClicks: url?.visitHistory?.length,
-        analytics: url?.visitHistory
+        allUrls
     })
 }
 

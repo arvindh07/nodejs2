@@ -51,7 +51,7 @@ const handleLogin = async (req, res) => {
         // res.cookie("sessionId", sessionId);
 
         // stateless authentication
-        const token = createToken(user.email, user._id.toString())
+        const token = createToken(user.email, user.role, user._id.toString())
         res.cookie("token", token);
  
         return res.render("Homepage");

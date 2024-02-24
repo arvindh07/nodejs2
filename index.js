@@ -9,6 +9,7 @@ const urlRouter = require("./routes/url");
 const staticRouter = require("./routes/staticRouter");
 const {verifyToken} = require("./utils/token");
 const { session } = require("./session/session");
+const checkUserAuth = require("./middlewares/auth");
 const PORT = process.env.PORT || 8001;
 
 const app = express();
@@ -26,9 +27,11 @@ app.use(express.static("public"));
 
 // logger route
 app.use("/", (req, res, next) => {
-    const date = new Date();
-    const logText = date.toLocaleString() + "\t" + req.method + "\t" + req.url + "\n";
-    logger(logText);
+    if(!req.url.includes("favicon")){
+        const date = new Date();
+        const logText = date.toLocaleString() + "\t" + req.method + "\t" + req.url + "\n";
+        logger(logText);
+    }
     next();
 })
 // static pages router

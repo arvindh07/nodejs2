@@ -1,5 +1,6 @@
 const express = require("express");
 const { handleCreateShortUrl, handleRedirectUrl, handleGetAllUrls, handleDeleteUrl, handleGetAnalytics} = require("../controllers/url");
+const { restrictTo } = require("../middlewares/authorization");
 
 const router = express.Router();
 
@@ -11,6 +12,6 @@ router.route("/:id")
     .get(handleRedirectUrl)
     .delete(handleDeleteUrl)
 
-router.get("/analytics/:id", handleGetAnalytics);
+router.get("/admin/analytics", restrictTo(["ADMIN"]) ,handleGetAnalytics);
 
 module.exports = router;
