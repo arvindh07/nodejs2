@@ -20,7 +20,10 @@ io.on("connection", (socket) => {
         console.log("Message from client -> ", msg);
     })
     socket.emit("testMsg", "test server msg");
+    io.emit("broadcast", "Welcome to my channel");
 })
+
+// broadcast
 
 // http server
 server.listen(8000, () => {

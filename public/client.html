@@ -52,6 +52,9 @@
         clientSocket.on("testMsg", (incomingMsg) => {
             console.log("message from server -> ", incomingMsg);
         })
+        clientSocket.on("broadcast", (incomingMsg) => {
+            console.log("message from broadcast -> ", incomingMsg);
+        })
     </script>
 </body>
 </html>
