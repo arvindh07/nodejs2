@@ -16,10 +16,10 @@ app.get("/", (req, res) => {
 
 // websocket
 io.on("connection", (socket) => {
-    // console.log("A new user connected from ", socket.id);
     socket.on("message", (msg) => {
         console.log("Message from client -> ", msg);
     })
+    socket.emit("testMsg", "test server msg");
 })
 
 // http server

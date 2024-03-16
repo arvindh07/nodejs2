@@ -49,6 +49,9 @@
             clientSocket.emit("message", msg.value);
             msg.value = "";
         }
+        clientSocket.on("testMsg", (incomingMsg) => {
+            console.log("message from server -> ", incomingMsg);
+        })
     </script>
 </body>
 </html>
