@@ -4,13 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat App</title>
+    <style>
+        body{
+            background-color: honeydew;
+            margin: 2rem auto;
+            width:50%;
+            text-align: center;
+        }
+        .container{
+            display: flex;
+            /* width: 50%; */
+            justify-content: center;
+        }
+        .container input{
+            margin-right: 1rem;
+        }
+        #sendBtn{
+            background-color: green;
+            border: 0;
+            color:white;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 15px;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to Chat World!!</h1>
 
+    <form onsubmit="sendMessage(event)">
+        <div class="container">
+            <input name="msg" id="inputMsg" type="text">
+            <button id="sendBtn" onclick="sendMessage(event)">Send</button>
+        </div>
+    </form>
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const clientSocket = io();
+        const msg = document.getElementById("inputMsg");
+        const sendBtn = document.getElementById("sendBtn");
+        const sendMessage = (e) => {
+            e.preventDefault();
+            clientSocket.emit("message", msg.value);
+            msg.value = "";
+        }
     </script>
 </body>
 </html>
