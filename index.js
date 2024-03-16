@@ -17,13 +17,14 @@ app.get("/", (req, res) => {
 // websocket
 io.on("connection", (socket) => {
     socket.on("message", (msg) => {
-        console.log("Message from client -> ", msg);
+        // console.log("Message from client -> ", msg);
+        io.emit("testMsg", msg);
     })
     socket.emit("testMsg", "test server msg");
-    io.emit("broadcast", "Welcome to my channel");
-})
 
-// broadcast
+    // broadcast
+    // io.emit("broadcast", "Welcome to my channel");
+})
 
 // http server
 server.listen(8000, () => {

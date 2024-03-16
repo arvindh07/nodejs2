@@ -37,6 +37,9 @@
             <input name="msg" id="inputMsg" type="text">
             <button id="sendBtn" onclick="sendMessage(event)">Send</button>
         </div>
+        <div id="msg__container">
+
+        </div>
     </form>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -44,17 +47,24 @@
         const clientSocket = io();
         const msg = document.getElementById("inputMsg");
         const sendBtn = document.getElementById("sendBtn");
+        const messages = document.getElementById("msg__container");
+        
         const sendMessage = (e) => {
             e.preventDefault();
             clientSocket.emit("message", msg.value);
             msg.value = "";
         }
         clientSocket.on("testMsg", (incomingMsg) => {
-            console.log("message from server -> ", incomingMsg);
+            // console.log("message from server -> ", incomingMsg);
+            const listEle = document.createElement("li");
+            listEle.textContent = incomingMsg;
+            messages.appendChild(listEle);
         })
-        clientSocket.on("broadcast", (incomingMsg) => {
-            console.log("message from broadcast -> ", incomingMsg);
-        })
+
+        // broadcast
+        // clientSocket.on("broadcast", (incomingMsg) => {
+        //     console.log("message from broadcast -> ", incomingMsg);
+        // })
     </script>
 </body>
 </html>
