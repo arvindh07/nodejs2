@@ -1,10 +1,18 @@
+const http = require("http");
 const express = require("express");
 const app = express();
+const server = http.createServer(app);
+const path = require("path");
 
+// add public
+app.use(express.static(path.resolve("./public")));
+
+// app for handling routes
 app.get("/", (req, res) => {
-    return res.status(200).end("<h1>Hello from websocket app</h1>");
+    return res.sendFile("/public/client.html", {root: __dirname});
 })
 
-app.listen(8000, () => {
+// http server
+server.listen(8000, () => {
     console.log("Server running on port 8000");
 });
